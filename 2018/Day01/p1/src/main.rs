@@ -48,7 +48,7 @@ fn parse_command_line() -> CommandLine {
 fn compute_input_sum( cli: &CommandLine ) -> Result<i32, ProgramError> {
     let input_file = File::open( &cli.input_file_name )?;
     let input_reader = BufReader::new( input_file );
-    let mut sum : i32 = 0;
+    let mut sum = 0;
 
     for line in input_reader.lines() {
         sum += line?.parse::<i32>()?;
