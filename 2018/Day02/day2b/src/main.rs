@@ -5,7 +5,7 @@ use std::io::{self, BufReader, BufRead};
 use std::fs::File;
 
 fn main() {
-    let cli = aoc_shared::parse_command_line( "Advent of Code Dat 2a" );
+    let cli = aoc_shared::parse_command_line( "Advent of Code Day 2b" );
     let box_ids = read_box_ids( &cli ).expect( "Failed to read box IDs." );
     let solution = find_solution( &box_ids ).expect( "Failed to find prototype fabric." );
     println!( "Solution: {}", solution );
