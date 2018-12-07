@@ -30,9 +30,9 @@ fn compute_checksum( box_ids: &[String] ) -> i32 {
         let mut has_two_count = false;
         let mut has_three_count = false;
 
-        for letter_count in letters.values() {
-            has_two_count |= *letter_count == 2;
-            has_three_count |= *letter_count == 3;
+        for &letter_count in letters.values() {
+            has_two_count |= letter_count == 2;
+            has_three_count |= letter_count == 3;
 
             if has_two_count && has_three_count {
                 break;
