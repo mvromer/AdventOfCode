@@ -1,7 +1,7 @@
-extern crate clap;
+extern crate aoc_shared;
 #[macro_use] extern crate quick_error;
 
-use clap::{Arg, App};
+use aoc_shared::CommandLine;
 use std::collections::HashSet;
 use std::io::{self, BufReader, BufRead};
 use std::fs::File;
@@ -22,29 +22,11 @@ quick_error! {
     }
 }
 
-struct CommandLine {
-    input_file_name: String
-}
-
 fn main() {
-    let cli = parse_command_line();
+    let cli = aoc_shared::parse_command_line( "Advent of Code 2018 Day 1b" );
     let frequency_shifts = read_frequency_shifts( &cli ).expect( "Failed to read frequency shifts from file" );
     let result = find_final_frequency( &frequency_shifts );
     println!( "Result: {}", result )
-}
-
-fn parse_command_line() -> CommandLine {
-    let matches = App::new( "AoC 2018 Day 1 Puzzle 1" )
-        .arg( Arg::with_name( "input" )
-            .help( "Input file to use" )
-            .required( true )
-            .index( 1 )
-        )
-        .get_matches();
-
-    CommandLine {
-        input_file_name: matches.value_of( "input" ).unwrap().to_string()
-    }
 }
 
 fn read_frequency_shifts( cli: &CommandLine ) -> Result<Vec<i32>, ProgramError> {

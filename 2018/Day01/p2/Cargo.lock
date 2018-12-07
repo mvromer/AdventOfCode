@@ -7,6 +7,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "aoc_shared"
+version = "0.1.0"
+dependencies = [
+ "clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "atty"
 version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -44,7 +51,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "p2"
 version = "0.1.0"
 dependencies = [
- "clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "aoc_shared 0.1.0",
  "quick-error 1.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
