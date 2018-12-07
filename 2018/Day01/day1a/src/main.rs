@@ -1,25 +1,8 @@
 extern crate aoc_shared;
-#[macro_use] extern crate quick_error;
 
-use aoc_shared::CommandLine;
-use std::io::{self, BufReader, BufRead};
+use aoc_shared::{CommandLine, ProgramError};
+use std::io::{BufReader, BufRead};
 use std::fs::File;
-use std::num;
-
-quick_error! {
-    #[derive( Debug )]
-    enum ProgramError {
-        IoError( err: io::Error ) {
-            cause( err )
-            from()
-        }
-
-        ParseIntError( err: num::ParseIntError ) {
-            cause( err )
-            from()
-        }
-    }
-}
 
 fn main() {
     let cli = aoc_shared::parse_command_line( "Advent of Code Day 1a" );

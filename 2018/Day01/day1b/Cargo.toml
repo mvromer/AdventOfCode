@@ -4,5 +4,4 @@ version = "0.1.0"
 authors = ["Michael Romer <mvromer@gmail.com>"]
 
 [dependencies]
-quick-error = "1.2.2"
 aoc_shared = { path = "../../aoc_shared" }
