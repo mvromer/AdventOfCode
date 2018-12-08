@@ -24,7 +24,7 @@ fn read_frequency_shifts( cli: &CommandLine ) -> Result<Vec<i32>, ProgramError> 
     Ok( frequency_shifts )
 }
 
-fn find_final_frequency( frequency_shifts: &Vec<i32> ) -> i32 {
+fn find_final_frequency( frequency_shifts: &[i32] ) -> i32 {
     let mut observed_frequencies = HashSet::new();
     let mut current_frequency = 0;
 

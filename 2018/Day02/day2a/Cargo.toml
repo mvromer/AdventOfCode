@@ -2,6 +2,7 @@
 name = "day2a"
 version = "0.1.0"
 authors = ["Michael Romer <mvromer@gmail.com>"]
+edition = "2018"
 
 [dependencies]
 aoc_shared = { path = "../../aoc_shared" }
