@@ -6,4 +6,3 @@ edition = "2018"
 
 [dependencies]
 aoc_shared = { path = "../../aoc_shared" }
-regex = "1.1.0"
