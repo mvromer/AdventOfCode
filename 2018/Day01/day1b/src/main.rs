@@ -1,6 +1,5 @@
-extern crate aoc_shared;
-
-use aoc_shared::{CommandLine, ProgramError};
+use aoc_shared::CommandLine;
+use aoc_shared::error::ProgramError;
 use std::collections::HashSet;
 use std::io::{BufReader, BufRead};
 use std::fs::File;

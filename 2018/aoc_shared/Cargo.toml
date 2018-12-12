@@ -2,7 +2,9 @@
 name = "aoc_shared"
 version = "0.1.0"
 authors = ["Michael Romer <mvromer@gmail.com>"]
+edition = "2018"
 
 [dependencies]
 clap = "2.32.0"
 quick-error = "1.2.2"
+regex = "1.1.0"

@@ -1,20 +1,11 @@
-extern crate aoc_shared;
-
-use aoc_shared::CommandLine;
+use aoc_shared::day2;
 use std::collections::HashMap;
-use std::io::{self, BufReader, BufRead};
-use std::fs::File;
 
 fn main() {
     let cli = aoc_shared::parse_command_line( "Advent of Code Day 2a" );
-    let box_ids = read_box_ids( &cli ).expect( "Failed to read box IDs." );
+    let box_ids = day2::read_box_ids( &cli ).expect( "Failed to read box IDs." );
     let checksum = compute_checksum( &box_ids );
     println!( "Checksum: {}", checksum );
-}
-
-fn read_box_ids( cli: &CommandLine ) -> io::Result<Vec<String>> {
-    let input_reader = BufReader::new( File::open( &cli.input_file_name )? );
-    input_reader.lines().collect()
 }
 
 fn compute_checksum( box_ids: &[String] ) -> i32 {
