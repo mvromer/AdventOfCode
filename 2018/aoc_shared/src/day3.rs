@@ -26,7 +26,7 @@ pub fn read_claims( cli: &CommandLine ) -> Result<Vec<Claim>, ProgramError> {
             let height = convert_capture::<usize>( &captures, "height" )?;
 
             claims.push( Claim {
-                id: id,
+                id,
                 left: x,
                 top: y,
                 right: x + width - 1,

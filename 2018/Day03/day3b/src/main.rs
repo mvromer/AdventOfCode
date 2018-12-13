@@ -9,7 +9,8 @@ fn main() {
 
 fn find_nonoverlapped_claim( claims: &[Claim] ) -> Result<usize, String> {
 
-    'first_claim: for first_claim in claims.iter() {
+    'first_claim:
+    for first_claim in claims.iter() {
         for second_claim in claims.iter() {
             // If the two claims intersect, no need checking all other claims.
             if first_claim.id != second_claim.id && intersects( first_claim, second_claim ) {
