@@ -17,7 +17,6 @@ fn find_nonoverlapped_claim( claims: &[Claim] ) -> Result<usize, String> {
             }
         }
 
-
         return Ok( first_claim.id );
     }
 
