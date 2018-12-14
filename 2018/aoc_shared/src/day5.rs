@@ -7,7 +7,7 @@ pub fn read_polymer( cli: &CommandLine ) -> io::Result<String> {
     let mut input_reader = BufReader::new( File::open( &cli.input_file_name )? );
     let mut polymer = String::new();
     input_reader.read_to_string( &mut polymer )?;
-    Ok( polymer )
+    Ok( polymer.trim().to_string() )
 }
 
 pub fn run_reactions( mut polymer: String ) -> String {
