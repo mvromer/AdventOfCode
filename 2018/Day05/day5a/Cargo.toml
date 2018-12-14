@@ -1,0 +1,9 @@
+[package]
+name = "day5a"
+version = "0.1.0"
+authors = ["Michael Romer <mvromer@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+aoc_shared = { path = "../../aoc_shared" }
+regex = "1.1.0"
