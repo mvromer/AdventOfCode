@@ -47,15 +47,10 @@ fn find_sleepiest_guard_checksum( guard_events: &BTreeMap<NaiveDateTime, GuardEv
     }
 
     // Find the sleepiest guard, i.e., the one who slept the most number of minutes.
-    let mut sleepiest_guard = 0;
-    let mut sleepiest_guard_minutes_asleep = 0;
-
-    for (guard_id, current_guard_minutes_asleep) in total_minutes_asleep.iter() {
-        if *current_guard_minutes_asleep > sleepiest_guard_minutes_asleep {
-            sleepiest_guard = *guard_id;
-            sleepiest_guard_minutes_asleep = *current_guard_minutes_asleep;
-        }
-    }
+    let sleepiest_guard = total_minutes_asleep.iter()
+        .max_by_key( |&(_, minutes_asleep)| minutes_asleep )
+        .map( |(guard_id, _)| guard_id )
+        .unwrap();
 
     // Find which minute the sleepiest guard slept the longest.
     let most_slept_minute = &per_minute_sleep_counts[&sleepiest_guard]
