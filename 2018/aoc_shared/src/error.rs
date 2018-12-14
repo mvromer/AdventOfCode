@@ -29,6 +29,31 @@ impl Error for CaptureError {
     }
 }
 
+#[derive( Debug )]
+pub struct MatchError {
+    pub regex_description: String
+}
+
+impl MatchError {
+    pub fn new( regex_description: &str ) -> MatchError {
+        MatchError {
+            regex_description: String::from( regex_description )
+        }
+    }
+}
+
+impl fmt::Display for MatchError {
+    fn fmt( &self, f: &mut fmt::Formatter ) -> fmt::Result {
+        write!( f, "No match found for {} regex", self.regex_description )
+    }
+}
+
+impl Error for MatchError {
+    fn description( &self ) -> &str {
+        &self.regex_description
+    }
+}
+
 quick_error! {
     #[derive( Debug )]
     pub enum ProgramError {
@@ -43,6 +68,11 @@ quick_error! {
         }
 
         CaptureError( err: CaptureError ) {
+            cause( err )
+            from()
+        }
+
+        MatchError( err: MatchError ) {
             cause( err )
             from()
         }

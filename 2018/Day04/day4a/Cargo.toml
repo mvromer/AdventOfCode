@@ -1,11 +1,9 @@
 [package]
-name = "aoc_shared"
+name = "day4a"
 version = "0.1.0"
 authors = ["Michael Romer <mvromer@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+aoc_shared = { path = "../../aoc_shared" }
 chrono = "0.4.6"
-clap = "2.32.0"
-quick-error = "1.2.2"
-regex = "1.1.0"

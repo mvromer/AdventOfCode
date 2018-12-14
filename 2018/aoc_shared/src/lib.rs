@@ -1,6 +1,9 @@
 pub mod error;
 pub mod day2;
 pub mod day3;
+pub mod day4;
+
+mod regex;
 
 extern crate clap;
 use clap::{Arg, App};
