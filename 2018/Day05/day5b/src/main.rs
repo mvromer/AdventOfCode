@@ -3,7 +3,7 @@ use regex::Regex;
 use std::collections::HashSet;
 
 fn main() {
-    let cli = aoc_shared::parse_command_line( "Advent of Code Day 4b" );
+    let cli = aoc_shared::parse_command_line( "Advent of Code Day 5b" );
     let polymer = find_shortest_polymer( &day5::read_polymer( &cli ).expect( "Unable to read polymer" ) );
     println!( "{}", polymer.len() );
 }
