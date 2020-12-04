@@ -35,4 +35,4 @@ let main inputFileName =
     | Some (x, y) ->
         printfn "Found pair summing to target %d: %d + %d = %d" targetSum x y (x + y)
         printfn "Product of pair: %d" (x * y)
-    | None -> failwithf "Did not find a pair the sums to the target %d" targetSum
+    | None -> failwithf "Did not find a pair that sums to the target %d" targetSum

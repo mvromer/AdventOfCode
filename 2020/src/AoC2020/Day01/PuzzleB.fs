@@ -45,4 +45,4 @@ let main inputFileName =
     | Some (x, y, z) ->
         printfn "Found triple summing to target %d: %d + %d + %d = %d" targetSum x y z (x + y + z)
         printfn "Product of triple: %d" (x * y * z)
-    | None -> failwithf "Did not find a pair the sums to the target %d" targetSum
+    | None -> failwithf "Did not find a triple that sums to the target %d" targetSum
