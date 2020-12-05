@@ -8,6 +8,7 @@ let main argv =
         match puzzle with
         | "1a" -> Day01.PuzzleA.main
         | "1b" -> Day01.PuzzleB.main
+        | "2a" -> Day02.PuzzleA.main
         | _ -> failwithf "Unknown puzzle %s" puzzle
 
     puzzleMain inputFileName
