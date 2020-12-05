@@ -8,7 +8,7 @@ type private TreeFoldState =
         NumberTrees: int
     }
 
-    static member Defaut = { CurrentIndex = 0; NumberTrees = 0; }
+    static member Default = { CurrentIndex = 0; NumberTrees = 0; }
 
 let private checkForTree currentState (currentLine: string) =
     let treeHit = currentLine.[currentState.CurrentIndex] = '#'
@@ -20,6 +20,6 @@ let private checkForTree currentState (currentLine: string) =
 let main inputFileName =
     let result =
         File.ReadLines inputFileName
-        |> Seq.fold checkForTree TreeFoldState.Defaut
+        |> Seq.fold checkForTree TreeFoldState.Default
 
     printfn "Number trees: %d" result.NumberTrees
