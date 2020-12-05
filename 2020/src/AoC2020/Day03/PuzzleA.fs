@@ -2,7 +2,7 @@ module Day03.PuzzleA
 
 open System.IO
 
-type TreeFoldState =
+type private TreeFoldState =
     {
         CurrentIndex: int
         NumberTrees: int
@@ -10,7 +10,7 @@ type TreeFoldState =
 
     static member Defaut = { CurrentIndex = 0; NumberTrees = 0; }
 
-let checkForTree currentState (currentLine: string) =
+let private checkForTree currentState (currentLine: string) =
     let treeHit = currentLine.[currentState.CurrentIndex] = '#'
     {
         CurrentIndex = (currentState.CurrentIndex + 3) % currentLine.Length
