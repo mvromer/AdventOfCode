@@ -35,7 +35,7 @@ let private (|Entry|_|) input =
         then Some (makeEntryFromCaptureGroups result.Groups)
         else None
 
-let private isValidPassport entry =
+let private hasValidPassword entry =
     match entry with
     | Entry entry -> entry.IsPasswordValid()
     | _ -> failwithf "Could not parse input %s" entry
@@ -43,7 +43,7 @@ let private isValidPassport entry =
 let main inputFileName =
     let result =
         File.ReadLines inputFileName
-        |> Seq.filter isValidPassport
+        |> Seq.filter hasValidPassword
         |> Seq.length
 
-    printfn "Number valid passports: %d" result
+    printfn "Number valid passwords: %d" result
