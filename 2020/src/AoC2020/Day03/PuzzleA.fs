@@ -3,10 +3,8 @@ module Day03.PuzzleA
 open System.IO
 
 type private TreeFoldState =
-    {
-        CurrentIndex: int
-        NumberTrees: int
-    }
+    { CurrentIndex: int
+      NumberTrees: int }
 
     static member Default = { CurrentIndex = 0; NumberTrees = 0; }
 
