@@ -1,32 +1,27 @@
 module Day06.PuzzleA
 
-open System
 open System.IO
-open System.Text.RegularExpressions
 
 type private ParseState =
-    { CurrentGroup: Set<char>
+    { CurrentGroup: Set<char> list
       Groups: Set<char> list }
 
-    static member Default = { CurrentGroup = Set.empty; Groups = [] }
+    static member Default = { CurrentGroup = []; Groups = [] }
 
 let private parseCustomsDeclarations lines =
     let handleIndividualResponses parseState responses =
         match responses with
         | "" ->
-            { CurrentGroup = Set.empty
-              Groups = parseState.CurrentGroup :: parseState.Groups }
+            { CurrentGroup = []
+              Groups = (parseState.CurrentGroup |> Set.unionMany) :: parseState.Groups }
         | _ ->
             { parseState with
-                CurrentGroup =
-                    responses.ToCharArray()
-                    |> Set.ofArray
-                    |> Set.union parseState.CurrentGroup }
+                CurrentGroup = (responses.ToCharArray() |> Set.ofArray) :: parseState.CurrentGroup }
 
     let result = Seq.fold handleIndividualResponses ParseState.Default lines
-    if result.CurrentGroup |> Set.isEmpty
+    if result.CurrentGroup.IsEmpty
         then result.Groups
-        else result.CurrentGroup :: result.Groups
+        else (result.CurrentGroup |> Set.unionMany) :: result.Groups
 
 let main inputFileName =
     let sumOfCounts =
