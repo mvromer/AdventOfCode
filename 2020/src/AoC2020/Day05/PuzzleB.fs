@@ -39,8 +39,8 @@ let private computeSeatId boardingPass =
 
 // These two are only called in pipelines where the incoming items are 2-element intger arrays
 // created by (Seq.windowed 2).
-let private isNotConsecutive [|first; second|] = (second - first) <> 1
-let private computeMiddleSeat [|lowerSeat; upperSeat|] = (upperSeat + lowerSeat) / 2
+let private isNotConsecutive (seatIds: int[]) = (seatIds.[1] - seatIds.[0]) <> 1
+let private computeMiddleSeat (seatIds: int[]) = (seatIds.[1] + seatIds.[0]) / 2
 
 let main inputFileName =
     let mySeatId =
