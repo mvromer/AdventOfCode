@@ -15,6 +15,7 @@
     <Compile Include="Day05/PuzzleA.fs" />
     <Compile Include="Day05/PuzzleB.fs" />
     <Compile Include="Day06/PuzzleA.fs" />
+    <Compile Include="Day06/PuzzleB.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
