@@ -42,10 +42,10 @@ namespace Aoc2020.CSharp.Day07
 
             public int CountContainedBags(string sourceColor)
             {
-                // Do an exhaustive depth first search from the source bag to count all the bags
+                // Do an exhaustive breadth first search from the source bag to count all the bags
                 // contained by it. By exhaustive, I mean we don't track bags we've "visited" but
-                // but instead traverse over previously seen nodes so long as we're coming from a
-                // different edge.
+                // but instead traverse over previously seen nodes so long as we're arriving from a
+                // different path.
                 var remainingColorsWithCountScale = new Queue<(string, int)>();
                 int numberContained = 0;
 
