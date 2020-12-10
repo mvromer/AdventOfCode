@@ -19,6 +19,7 @@ let main argv =
         | "6a" -> Day06.PuzzleA.main
         | "6b" -> Day06.PuzzleB.main
         | "7a" -> Day07.PuzzleA.main
+        | "7b" -> Day07.PuzzleB.main
         | _ -> failwithf "Unknown puzzle %s" puzzle
 
     puzzleMain inputFileName
