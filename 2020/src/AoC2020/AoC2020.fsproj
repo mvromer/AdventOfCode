@@ -16,9 +16,13 @@
     <Compile Include="Day05/PuzzleB.fs" />
     <Compile Include="Day06/PuzzleA.fs" />
     <Compile Include="Day06/PuzzleB.fs" />
+    <Compile Include="Day07/PuzzleA.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Data" Version="3.3.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aoc2020.CSharp\Aoc2020.CSharp.csproj" />
   </ItemGroup>
 </Project>
