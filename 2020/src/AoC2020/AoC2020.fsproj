@@ -20,10 +20,12 @@
     <Compile Include="Day07/PuzzleB.fs" />
     <Compile Include="Day08/PuzzleA.fs" />
     <Compile Include="Day08/PuzzleB.fs" />
+    <Compile Include="Day09/PuzzleA.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FSharp.Data" Version="3.3.3" />
+    <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aoc2020.CSharp\Aoc2020.CSharp.csproj" />
