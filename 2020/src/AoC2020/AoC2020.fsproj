@@ -21,6 +21,7 @@
     <Compile Include="Day08/PuzzleA.fs" />
     <Compile Include="Day08/PuzzleB.fs" />
     <Compile Include="Day09/PuzzleA.fs" />
+    <Compile Include="Day09/PuzzleB.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
