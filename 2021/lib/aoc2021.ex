@@ -1,18 +1,7 @@
 defmodule Aoc2021 do
-  @moduledoc """
-  Documentation for `Aoc2021`.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Aoc2021.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  defmacro __using__(_) do
+    quote do
+      @puzzle_input Path.dirname(__ENV__.file) |> Path.join("input.txt")
+    end
   end
 end
