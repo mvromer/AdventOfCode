@@ -2,10 +2,7 @@ defmodule Aoc2021.Day01 do
   use Aoc2021
 
   def solve_a do
-    depths =
-      File.stream!(@puzzle_input)
-      |> Stream.map(&parse_line/1)
-
+    depths = File.stream!(@puzzle_input) |> Stream.map(&parse_line/1)
     initialDepth = depths |> Enum.take(1) |> List.first()
 
     depths
@@ -15,10 +12,13 @@ defmodule Aoc2021.Day01 do
   end
 
   def solve_b do
+    chunk_size = 3
+    chunk_shift_amount = 1
+
     depth_chunks =
       File.stream!(@puzzle_input)
       |> Stream.map(&parse_line/1)
-      |> Stream.chunk_every(3, 1, :discard)
+      |> Stream.chunk_every(chunk_size, chunk_shift_amount, :discard)
 
     initialSum = depth_chunks |> Enum.take(1) |> List.first() |> Enum.sum()
 
