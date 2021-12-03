@@ -20,7 +20,26 @@ defmodule Aoc2021.Day02 do
   end
 
   def solve_b do
+    move = fn next_move, {current_depth, current_horizontal, current_aim} ->
+      case next_move do
+        {"forward", step} ->
+          {current_depth + current_aim * step, current_horizontal + step, current_aim}
 
+        {"up", step} ->
+          {current_depth, current_horizontal, current_aim - step}
+
+        {"down", step} ->
+          {current_depth, current_horizontal, current_aim + step}
+      end
+    end
+
+    {final_depth, final_horizontal, _} =
+      @puzzle_input
+      |> File.stream!()
+      |> Stream.map(&parse_line/1)
+      |> Enum.reduce({0, 0, 0}, move)
+
+    final_depth * final_horizontal
   end
 
   defp parse_line(line) do
