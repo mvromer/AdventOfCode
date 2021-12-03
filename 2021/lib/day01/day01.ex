@@ -4,7 +4,7 @@ defmodule Aoc2021.Day01 do
   def solve_a do
     depths =
       File.stream!(@puzzle_input)
-      |> Stream.map(&(&1 |> String.trim() |> String.to_integer()))
+      |> Stream.map(&parse_line/1)
 
     initialDepth = depths |> Enum.take(1) |> List.first()
 
@@ -17,7 +17,7 @@ defmodule Aoc2021.Day01 do
   def solve_b do
     depth_chunks =
       File.stream!(@puzzle_input)
-      |> Stream.map(&(&1 |> String.trim() |> String.to_integer()))
+      |> Stream.map(&parse_line/1)
       |> Stream.chunk_every(3, 1, :discard)
 
     initialSum = depth_chunks |> Enum.take(1) |> List.first() |> Enum.sum()
@@ -31,6 +31,8 @@ defmodule Aoc2021.Day01 do
     |> Enum.reduce({initialSum, 0}, reduceChunk)
     |> elem(1)
   end
+
+  defp parse_line(line), do: line |> String.trim() |> String.to_integer()
 
   defp increment_on_value_increase(nextValue, {previousValue, numberIncreases}) do
     {nextValue, if(nextValue > previousValue, do: numberIncreases + 1, else: numberIncreases)}
