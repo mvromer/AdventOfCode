@@ -71,6 +71,9 @@ defmodule Aoc2021.Day03 do
       end)
       |> bit_selector.()
 
+    # Retain only those bitwords whose current leading bit matches the filter bit. Strip off the
+    # current leading bit from those bitwords and pass them recursively to the next step of this
+    # reducer.
     bitwords
     |> Stream.filter(fn [bit | _] -> bit === filter_bit end)
     |> Enum.map(fn [_ | rest] -> rest end)
