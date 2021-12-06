@@ -25,13 +25,20 @@ defmodule Aoc2021.Day04 do
 
   def solve_a do
     {called_numbers, bingo_cards} = read_bingo_game!()
-    {final_number, winning_card} = play_round!(called_numbers, bingo_cards)
+    {final_number, first_winning_card} = find_first_winner!(called_numbers, bingo_cards)
 
-    final_number * (winning_card.open_positions |> Map.keys() |> Enum.sum())
+    compute_final_score(final_number, first_winning_card)
   end
 
   def solve_b do
+    {called_numbers, bingo_cards} = read_bingo_game!()
+    {final_number, last_winning_card} = find_last_winner(called_numbers, bingo_cards)
+
+    compute_final_score(final_number, last_winning_card)
   end
+
+  def compute_final_score(final_number, bingo_card),
+    do: final_number * (bingo_card.open_positions |> Map.keys() |> Enum.sum())
 
   defp read_bingo_game! do
     File.open!(@puzzle_input, [:read, :utf8], fn file ->
@@ -99,24 +106,70 @@ defmodule Aoc2021.Day04 do
     end
   end
 
-  defp play_round!([], _), do: raise(RuntimeError, "No bingo winner found")
+  defp find_first_winner!([], _), do: raise(RuntimeError, "No bingo winner found")
 
-  defp play_round!([called_number | remaining_numbers], bingo_cards) do
-    case mark_cards(called_number, bingo_cards) do
+  defp find_first_winner!([called_number | remaining_numbers], bingo_cards) do
+    case check_for_winner(called_number, bingo_cards) do
       winning_card when is_struct(winning_card) -> {called_number, winning_card}
-      updated_cards -> play_round!(remaining_numbers, updated_cards)
+      updated_cards -> find_first_winner!(remaining_numbers, updated_cards)
     end
   end
 
-  defp mark_cards(called_number, bingo_cards) do
-    Enum.reduce_while(bingo_cards, [], &mark_card(called_number, &1, &2))
+  defp check_for_winner(called_number, bingo_cards) do
+    Enum.reduce_while(bingo_cards, [], fn bingo_card, updated_cards ->
+      {updated_card, row, column} = mark_card(called_number, bingo_card)
+
+      cond do
+        updated_card.called_row_counts[row] == 5 -> {:halt, updated_card}
+        updated_card.called_column_counts[column] == 5 -> {:halt, updated_card}
+        true -> {:cont, [updated_card | updated_cards]}
+      end
+    end)
   end
 
-  defp mark_card(called_number, bingo_card, updated_cards) do
+  defp find_last_winner(called_numbers, bingo_cards) do
+    called_numbers
+    |> Enum.reduce({bingo_cards, []}, &update_card_partitions/2)
+    |> elem(1)
+    |> List.first()
+  end
+
+  defp update_card_partitions(called_number, {remaining_cards, current_winning_cards}) do
+    %{remaining: new_remaining_cards, winning: new_winning_cards} =
+      Map.merge(
+        %{remaining: [], winning: []},
+        partition_by_winning_state(called_number, remaining_cards)
+      )
+
+    {
+      new_remaining_cards,
+      Enum.reverse(new_winning_cards) ++ current_winning_cards
+    }
+  end
+
+  defp partition_by_winning_state(called_number, bingo_cards) do
+    bingo_cards
+    |> Stream.map(fn bingo_card ->
+      {updated_card, row, column} = mark_card(called_number, bingo_card)
+
+      cond do
+        updated_card.called_row_counts[row] == 5 ->
+          {:winning, {called_number, updated_card}}
+
+        updated_card.called_column_counts[column] == 5 ->
+          {:winning, {called_number, updated_card}}
+
+        true ->
+          {:remaining, updated_card}
+      end
+    end)
+    |> Enum.group_by(&elem(&1, 0), &elem(&1, 1))
+  end
+
+  defp mark_card(called_number, bingo_card) do
     case bingo_card.open_positions[called_number] do
       nil ->
-        # Number not on this card. Return it unchanged.
-        {:cont, [bingo_card | updated_cards]}
+        {bingo_card, nil, nil}
 
       {row, column} ->
         new_called_row_count = bingo_card.called_row_counts[row] + 1
@@ -134,11 +187,7 @@ defmodule Aoc2021.Day04 do
           }
         }
 
-        cond do
-          new_called_row_count == 5 -> {:halt, updated_card}
-          new_called_column_count == 5 -> {:halt, updated_card}
-          true -> {:cont, [updated_card | updated_cards]}
-        end
+        {updated_card, row, column}
     end
   end
 end
