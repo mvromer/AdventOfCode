@@ -32,6 +32,15 @@ defmodule Aoc2021.Day06 do
 
   @number_days 256
 
+  # Here d is the current day, the spawn timer, and c is the accumulated count.
+  # The idea is that we do a sort of recursive depth first walk of a tree that relates a fish to the
+  # the fish that spawned it. When we recur with a spawn timer set to 8, that's essentially spawning
+  # a new fish. When we recur with a spawn timer set to 6, we are essentially advancing the current
+  # fish (represented by the current invocation) to its next spawning time.
+  #
+  # This worked for the original part A example where there were 5 initial fish and checking after
+  # 18 days. However, this recursive solution did not scale (took too long/never terminated) when
+  # set to the full 256 days.
   def f(d, t, c) when d + t >= @number_days, do: c
   def f(d, t, c), do: f(d + t + 1, 6, f(d + t + 1, 8, c + 1))
 end
