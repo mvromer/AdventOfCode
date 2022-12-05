@@ -19,20 +19,18 @@ p1b inputType = do
     putStrLn (show top3Calories)
 
 readCalories :: [BS.ByteString] -> [Int]
-readCalories puzzle = (sum lastElfCalories):elfCalories
+readCalories puzzle = lastElfCalories:caloriesPerElf
     where
-        (elfCalories, lastElfCalories) = foldl (updateCalories) ([],[]) puzzle
+        (caloriesPerElf, lastElfCalories) = foldl (updateCalories) ([], 0) puzzle
 
-        updateCalories :: ([Int], [Int]) -> BS.ByteString -> ([Int], [Int])
-        updateCalories (calories, []) EmptyByteString = (calories, [])
+        updateCalories :: ([Int], Int) -> BS.ByteString -> ([Int], Int)
+        updateCalories (currentCaloriesPerElf, currentElfCalories) EmptyByteString =
+            (currentElfCalories:currentCaloriesPerElf, 0)
 
-        updateCalories (calories, currentElfCalories) EmptyByteString = (updatedCalories, [])
-            where updatedCalories = (sum currentElfCalories):calories
-
-        updateCalories (calories, currentElfCalories) nextElfCalorie =
-            case BS.readInt nextElfCalorie of
-                Just (calorie, _) -> (calories, calorie:currentElfCalories)
-                _ -> error ("Unexpected calorie" ++ (BS.unpack nextElfCalorie))
+        updateCalories (currentCaloriesPerElf, currentElfCalories) snackCalories =
+            case BS.readInt snackCalories of
+                Just (calories, _) -> (currentCaloriesPerElf, calories + currentElfCalories)
+                _ -> error ("Unexpected calorie" ++ (BS.unpack snackCalories))
 
 pattern EmptyByteString :: BS.ByteString
 pattern EmptyByteString <- (BS.uncons -> Nothing)
