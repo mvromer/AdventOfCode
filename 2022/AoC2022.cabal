@@ -53,6 +53,7 @@ library
 
     -- Modules exported by the library.
     exposed-modules:  Day01
+                    , Day02
 
     -- Modules included in this library but not exported.
     other-modules: PuzzleInput
@@ -63,6 +64,7 @@ library
     -- Other library packages from which modules are imported.
     build-depends:    base ^>=4.17.0.0
                     , bytestring ^>=0.11.3.1
+                    , text ^>=2.0.1
 
     -- Directories containing source files.
     hs-source-dirs:   src
