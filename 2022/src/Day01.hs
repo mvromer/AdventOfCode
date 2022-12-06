@@ -6,17 +6,17 @@ import Data.List
 import PuzzleInput
 import qualified Data.ByteString.Lazy.Char8 as BS
 
-p1a :: PuzzleInput -> IO ()
-p1a inputType = do
-    puzzle <- BS.readFile (puzzleInput inputType)
-    let maxCalories = maximum . readCalories . BS.lines $ puzzle
-    putStrLn (show maxCalories)
+p1a :: PuzzleInput -> IO Int
+p1a inputType = maximum . readCalories . BS.lines <$> BS.readFile (puzzleInput inputType)
 
-p1b :: PuzzleInput -> IO ()
-p1b inputType = do
-    puzzle <- BS.readFile (puzzleInput inputType)
-    let top3Calories = sum . take 3 . reverse . sort . readCalories . BS.lines $ puzzle
-    putStrLn (show top3Calories)
+p1b :: PuzzleInput -> IO Int
+p1b inputType = sum
+    . take 3
+    . reverse
+    . sort
+    . readCalories
+    . BS.lines
+    <$> BS.readFile (puzzleInput inputType)
 
 readCalories :: [BS.ByteString] -> [Int]
 readCalories puzzle = lastElfCalories:caloriesPerElf
