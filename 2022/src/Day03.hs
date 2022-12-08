@@ -33,7 +33,8 @@ findOutOfPlaceItems = map findOutOfPlaceItem
           (firstCompartment, secondCompartment) = TL.splitAt (numberItems `div` 2) rucksack
           firstItemTypes = Set.fromList (TL.unpack firstCompartment)
           secondItemTypes = Set.fromList (TL.unpack secondCompartment)
-      in Set.elemAt 0 (Set.intersection firstItemTypes secondItemTypes)
+          outOfPlaceItem = Set.intersection firstItemTypes secondItemTypes
+      in Set.elemAt 0 outOfPlaceItem
 
 findBadgeItems :: [TL.Text] -> [Char]
 findBadgeItems = map findBadgeItem . chunksOf 3
