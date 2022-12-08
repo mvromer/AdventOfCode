@@ -1,5 +1,6 @@
 module Day03 (p3a, p3b) where
 
+import Data.List.Split;
 import PuzzleInput
 
 import qualified Data.Map.Strict as Map
@@ -16,7 +17,12 @@ p3a inputType =
     <$> TLIO.readFile (puzzleInput inputType)
 
 p3b :: PuzzleInput -> IO Int
-p3b inputType = return 0
+p3b inputType =
+  sum
+    . convertToPriorities
+    . findBadgeItems
+    . TL.lines
+    <$> TLIO.readFile (puzzleInput inputType)
 
 findOutOfPlaceItems :: [TL.Text] -> [Char]
 findOutOfPlaceItems = map findOutOfPlaceItem
@@ -28,6 +34,19 @@ findOutOfPlaceItems = map findOutOfPlaceItem
           firstItemTypes = Set.fromList (TL.unpack firstCompartment)
           secondItemTypes = Set.fromList (TL.unpack secondCompartment)
       in Set.elemAt 0 (Set.intersection firstItemTypes secondItemTypes)
+
+findBadgeItems :: [TL.Text] -> [Char]
+findBadgeItems = map findBadgeItem . chunksOf 3
+  where
+    findBadgeItem :: [TL.Text] -> Char
+    findBadgeItem (x:y:z:[]) =
+      let firstSack = Set.fromList (TL.unpack x)
+          secondSack = Set.fromList (TL.unpack y)
+          thirdSack = Set.fromList (TL.unpack z)
+          badgeItem = Set.intersection firstSack . Set.intersection secondSack $ thirdSack
+      in Set.elemAt 0 badgeItem
+
+    findBadgeItem xs = error ("Expected three rucksacks for " ++ (TL.unpack . TL.unlines $ xs))
 
 convertToPriorities :: [Char] -> [Int]
 convertToPriorities = map (priorityMap Map.!)
