@@ -2,19 +2,19 @@ namespace AoC;
 
 public static class Global
 {
-    public static void InvokeVariant(string[] args, Action<string> partA, Action<string> partB)
+    public static void InvokePart(string[] args, Action<string> partA, Action<string> partB)
     {
-        var variant = args[0];
+        var part = args[0];
         var useExample = args.Length > 1 && args[1] == "ex";
 
-        switch (variant)
+        switch (part)
         {
             case "a":
-                InvokeVariant(variant, useExample, partA);
+                InvokePart(part, useExample, partA);
                 break;
 
             case "b":
-                InvokeVariant(variant, useExample, partB);
+                InvokePart(part, useExample, partB);
                 break;
 
             default:
@@ -22,9 +22,9 @@ public static class Global
         }
     }
 
-    private static void InvokeVariant(string variant, bool useExample, Action<string> part)
+    private static void InvokePart(string part, bool useExample, Action<string> partAction)
     {
-        var inputFileName = useExample ? $"ex{variant}.txt" : "input.txt";
-        part(inputFileName);
+        var inputFileName = useExample ? $"ex{part}.txt" : "input.txt";
+        partAction(inputFileName);
     }
 }

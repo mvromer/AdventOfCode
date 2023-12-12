@@ -1,7 +1,7 @@
 ﻿using static AoC.Global;
 using static Constants;
 
-InvokeVariant(args, PartA, PartB);
+InvokePart(args, PartA, PartB);
 
 static void PartA(string inputFileName)
 {
